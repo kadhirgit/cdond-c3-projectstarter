@@ -42,9 +42,9 @@ jobs:
           keys: [frontend-build]
       - run:
           name: Build front-end
-          command: 
-            #npm install
-            #npm run build
+          command: |
+            npm install
+            npm run build
             # Your code here
             #exit 1
       - save_cache:
@@ -60,9 +60,9 @@ jobs:
           keys: [backend-build]
       - run:
           name: Back-end build
-          command: 
-            #npm install
-            #npm run build
+          command: |
+            npm install
+            npm run build
              # Your code here
              # exit 1
       - save_cache:
