@@ -42,7 +42,7 @@ jobs:
           keys: [frontend-build]
       - run:
           name: Build front-end
-          command: |
+          command:
             npm install
             npm run build
             # Your code here
@@ -60,7 +60,7 @@ jobs:
           keys: [backend-build]
       - run:
           name: Back-end build
-          command: |
+          command:
             npm install
             npm run build
              # Your code here
@@ -69,21 +69,21 @@ jobs:
           paths: [backend/node_modules]
           key: backend-build
 
-  # test-frontend:
-  #   docker:
-  #     # Docker image here
-  #   steps:
-  #     # Checkout code from git
-  #     # Restore from cache
-  #     # Your job code here
+  test-frontend:
+    docker:
+      # Docker image here
+    steps:
+      # Checkout code from git
+      # Restore from cache
+      # Your job code here
                 
-  # test-backend:
-  #   docker:
-  #     # Docker image here
-  #   steps:
-  #     # Checkout code from git
-  #     # Restore from cache
-  #     # Your job code here
+  test-backend:
+    docker:
+      # Docker image here
+    steps:
+      # Checkout code from git
+      # Restore from cache
+      # Your job code here
             
   # scan-frontend:
   #   docker:
