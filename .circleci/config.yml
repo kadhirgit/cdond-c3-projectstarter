@@ -42,7 +42,7 @@ jobs:
           keys: [frontend-build]
       - run:
           name: Build front-end
-          command: |
+          command:
             npm install
             npm run build
             # Your code here
@@ -60,7 +60,7 @@ jobs:
           keys: [backend-build]
       - run:
           name: Back-end build
-          command: |
+          command: 
             npm install
             npm run build
              # Your code here
@@ -82,7 +82,7 @@ jobs:
           keys: [frontend-test]
       - run:
           name: Frontend test
-          command:
+          command: |
             npm install
             npm run test
       - save_cache:
@@ -102,7 +102,7 @@ jobs:
           keys: [backend-test]
       - run:
           name: Backend test
-          command:
+          command: |
             npm install
             npm run test
       - save_cache:
