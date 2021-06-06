@@ -82,8 +82,7 @@ jobs:
           keys: [frontend-test]
       - run:
           name: Frontend test
-          working_directory: ./frontend
-          command: 
+          command: |
             npm install
             npm run test
       - save_cache:
@@ -103,8 +102,7 @@ jobs:
           keys: [backend-test]
       - run:
           name: Backend test
-          working_directory: ./backend
-          command: 
+          command: |
             npm install
             npm run test
       - save_cache:
