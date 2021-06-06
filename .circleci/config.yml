@@ -84,7 +84,7 @@ jobs:
           name: Frontend test
           working_directory: ./frontend
           command: 
-            # npm install
+            npm install
             npm run test
       - save_cache:
           paths: [frontend/node_modules]
@@ -105,7 +105,7 @@ jobs:
           name: Backend test
           working_directory: ./backend
           command: 
-            # npm install
+            npm install
             npm run test
       - save_cache:
           paths: [backend/node_modules]
