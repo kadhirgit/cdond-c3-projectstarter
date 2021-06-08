@@ -125,8 +125,8 @@ jobs:
       - run:
           name: Frontend scan
           command: |
-            # npm install
             cd frontend
+            npm install
             npm audit --audit-level=critical
             # npm audit fix --audit-level=critical --force
       - save_cache:
@@ -147,8 +147,8 @@ jobs:
       - run:
           name: Backend scan
           command: |
-            # npm install
             cd backend
+            npm install
             npm audit --audit-level=critical
             # npm audit fix --audit-level=critical --force
       - save_cache:
