@@ -120,8 +120,8 @@ jobs:
       # Restore from cache
       # Your job code here
       - checkout
-      # - restore_cache:
-        #  keys: [frontend-scan]
+       - restore_cache:
+          keys: [frontend-scan]
       - run:
           name: Frontend scan
           command: |
@@ -142,8 +142,8 @@ jobs:
       # Restore from cache
       # Your job code here
       - checkout
-      #- restore_cache:
-      #    keys: [backend-scan]
+      - restore_cache:
+          keys: [backend-scan]
       - run:
           name: Backend scan
           command: |
