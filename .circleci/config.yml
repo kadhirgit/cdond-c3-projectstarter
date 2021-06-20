@@ -181,7 +181,7 @@ jobs:
               --stack-name "production-distro" \
               --parameter-overrides ID="618036438675"  
               exit 1
-      -run:
+      - run:
           name: Get and store backend IP
           command: |
             URLS=$(aws ec2 describe-instances --region us-east-1 \ 
