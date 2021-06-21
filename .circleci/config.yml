@@ -176,7 +176,7 @@ jobs:
           name: Ensure back-end infrastructure exists
           command: |
             aws cloudformation deploy \
-              --template-file .circleci/files/backend.yml \
+              --template-file project/.circleci/files/backend.yml \
               --tags project=udapeople \
               --stack-name "production-distro" \
               --parameter-overrides ID="618036438675"  
