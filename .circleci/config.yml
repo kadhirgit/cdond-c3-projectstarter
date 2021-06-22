@@ -181,7 +181,7 @@ jobs:
               --tags project=udapeople \
               --stack-name "production-distro" \
               --parameter-overrides ID="618036438675"  
-              exit 1
+              # exit 1
       - run:
           name: Get and store backend IP
           command: |
@@ -199,7 +199,7 @@ jobs:
               --tags project=udapepole \
               --stack-name "production-distro" \
               --parameter-overrides ID="618036438675"  
-              exit 1
+              # exit 1
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -207,7 +207,7 @@ jobs:
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> inventory
-            #exit 1
+            # exit 1
       - persist_to_workspace:
           root: ~/
           paths:
