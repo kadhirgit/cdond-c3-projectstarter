@@ -190,7 +190,7 @@ jobs:
               --filters "Name=tag:Name,Values=backend-${WORKFLOW_ID}" \
               --output text) 
             curl -H "Content-Type: text/plain" -H "f83b2517-4e88-48b9-bf33-a9c3d5e2a864" \
-              --request PUT --data "$URLS" https://api.memstash.io/values/url
+              --request PUT --data "$URLS" https://api.memstash.io/values/
       - run:
           name: Ensure front-end infrastructure exist
           command: |
