@@ -237,28 +237,28 @@ jobs:
           fingerprints:
             ["0c:50:09:88:f6:01:71:a5:6b:c5:7d:2e:7d:33:d5:30"]
       - attach_workspace:
-          at: /tmp/ansible
+          at: .circleci/ansible
       - run:
           name: Install dependencies
           command: |
             # Your code here
             # exit 1
-            apk add --no-cache \
-                python3 \
-                py3-pip \
-            && pip3 install --upgrade pip \
-            && pip3 install \
-                awscli \
-            && rm -rf /var/cache/apk/*
+            # apk add --no-cache \
+            #     python3 \
+            #     py3-pip \
+            # && pip3 install --upgrade pip \
+            # && pip3 install \
+            #     awscli \
+            # && rm -rf /var/cache/apk/*
+            # apk add --update ansible
             apk add --update ansible
       - run:
           name: Configure server
           command: |
             # Your code here
             # exit 1
-            ansible-playbook -i /tmp/ansible/inventory.txt .circleci/ansible/configure-server.yml
+            ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
       # Here's where you will add some code to rollback on failure      
-      - destroy-environment
 
   # run-migrations:
   #   docker:
