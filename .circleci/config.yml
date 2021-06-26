@@ -185,7 +185,7 @@ jobs:
       - run:
           name: Get and store backend IP
           command: |
-            URLS=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters 'Name=tag:Name,Values=backend-${WORKFLOW_ID}' --output text >> inventory.txt) 
+            URLS=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Name,Values=backend-${WORKFLOW_ID}" --output text >> inventory.txt) 
             curl -H "Content-Type: text/plain" -H "f83b2517-4e88-48b9-bf33-a9c3d5e2a864" --request PUT --data "$URLS" https://api.memstash.io/values/url_${WORKFLOW_ID}
               
       - run:
