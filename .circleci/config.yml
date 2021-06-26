@@ -178,7 +178,7 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --tags project=udapeople \
+              --tags project=udapeople-backend \
               --stack-name "production-distro" \
               --parameter-overrides ID="618036438675"  
               # exit 1
@@ -199,7 +199,7 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --tags project=udapepole \
+              --tags project=udapepole-frontend \
               --stack-name "production-distro" \
               --parameter-overrides ID="618036438675"  
               # exit 1
@@ -209,6 +209,7 @@ jobs:
             # Your code here
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters Name=tag:Name,Values=backend-$WORKFLOW_ID \
               --output text >> inventory
             # exit 1
       - persist_to_workspace:
@@ -217,6 +218,8 @@ jobs:
             - project/.circleci/ansible/inventory.txt
       # Here's where you will add some code to rollback on failure   
       - destroy-environment    
+          id: ${WORKFLOW_ID}
+          when: on_fail
 
   configure-infrastructure:
     docker:
