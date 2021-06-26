@@ -173,6 +173,11 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
+      #Need to install tar apparently
+      - run:
+        name: Install tar/gzip utility
+        command: |
+          yum -y install tar
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -217,9 +222,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       # Here's where you will add some code to rollback on failure   
-      #- destroy-environment    
-          #id: WORKFLOW_ID
-          #when: on_fail
+     
 
   configure-infrastructure:
     docker:
