@@ -130,8 +130,8 @@ jobs:
       - run:
           name: frontend security check
           working_directory: ./frontend
-          command: 
-            #npm i
+          command: |
+            npm i # added to fix oAuth package 
             npm audit fix --audit-level=critical 
 
   scan-backend:
