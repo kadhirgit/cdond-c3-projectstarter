@@ -33,7 +33,6 @@ commands:
           command: |
             echo "Destroying environment: <<parameters.circi_workflow_id>> "
             aws cloudformation delete-stack --stack-name udapeople-c3-backend-<<parameters.circi_workflow_id>>
-            aws s3 rm s3://udapeople-c3-udap-<<parameters.circi_workflow_id>> --recursive
             aws cloudformation delete-stack --stack-name udapeople-c3-frontend-<<parameters.circi_workflow_id>>
             
   # revert-migrations:
@@ -55,7 +54,7 @@ commands:
   #             exit 1
   #           fi
             
-#### Bulding front-end #####
+#### Building front-end #####
 
 jobs:
   build-frontend:
@@ -75,7 +74,7 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
             
-#### Bulding back-end #####
+#### Building back-end #####
 
   build-backend:
     <<: *docker_node
@@ -143,7 +142,10 @@ jobs:
     <<: *docker_awscli
     
     steps:
-      # Checkout code from git
+      - checkout
+      - run:
+          name: install dependancy
+          command: yum install -y tar gzip
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -380,7 +382,7 @@ workflows:
           requires: [test-frontend, test-backend] # scan-frontend, scan-backend]
           filters:
             branches:
-              only: [test-feature-branch]
+              only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
  #     - run-migrations:
