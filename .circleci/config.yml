@@ -4,7 +4,7 @@ dockernode: &docker_node
     docker:
       - image: circleci/node:13.8.0
       
-dockeraws: &doker_awscli
+dockeraws: &docker_awscli
     docker:
       - image: amazon/aws-cli
       
