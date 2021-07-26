@@ -158,14 +158,14 @@ jobs:
       - run:
           name: install dependancy
           command: yum install -y tar gzip
-      # - run:
-      #     name: Ensure back-end infrastructure exists
-      #     command: |
-      #       aws cloudformation deploy \
-      #         --template-file .circleci/files/backend.yml \
-      #         --stack-name udapeople-c3-backend-${CIRCLE_WORKFLOW_ID:0:7} \
-      #         --parameter-overrides ID="udap-${CIRCLE_WORKFLOW_ID:0:7}" \
-      #         --region ap-south-1
+      - run:
+          name: Ensure back-end infrastructure exists
+          command: |
+            aws cloudformation deploy \
+              --template-file .circleci/files/backend.yml \
+              --stack-name udapeople-c3-backend-${CIRCLE_WORKFLOW_ID:0:7} \
+              --parameter-overrides ID="udap-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --region ap-south-1
       - run:
           name: Ensure front-end infrastructure exists
           command: |
@@ -391,7 +391,7 @@ workflows:
       - scan-frontend:
           requires: [build-frontend]
       - deploy-infrastructure:
-          requires: [build-frontend, test-frontend, scan-frontend,test-backend, scan-backend]
+          requires: [build-frontend, test-frontend, build-backend,scan-frontend,test-backend, scan-backend]
           filters:
             branches:
               only: [master]
@@ -399,10 +399,10 @@ workflows:
           requires: [deploy-infrastructure]
  #     - run-migrations:
  #         requires: [configure-infrastructure]
-      - deploy-frontend:
+      - deploy-backend:
            requires: [configure-infrastructure]
-   #   - deploy-backend:
-    #       requires: [configure-infrastructure]
+      - deploy-frontend:
+           requires: [deploy-backend]
  #     - smoke-test:
  #         requires: [deploy-backend, deploy-frontend]
  #     - cloudfront-update:
