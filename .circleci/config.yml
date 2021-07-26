@@ -144,8 +144,9 @@ jobs:
       - run:
           name: backend security check
           working_directory: ./backend
-          command: 
+          command: |
             npm audit fix --audit-level=critical  
+            exit 1
 
 #### Infrastructure Deployment ####
 
