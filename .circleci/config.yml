@@ -381,8 +381,8 @@ workflows:
     #      requires: [build-backend]
    #   - scan-backend:
    #       requires: [build-backend]
-   #   - scan-frontend:
-   #       requires: [build-frontend]
+      - scan-frontend:
+          requires: [build-frontend]
       - deploy-infrastructure:
           requires: [build-frontend, test-frontend, scan-frontend] # scan-backend]
           filters:
