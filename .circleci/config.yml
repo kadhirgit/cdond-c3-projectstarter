@@ -85,6 +85,7 @@ jobs:
           keys: [backend-build]
       - run:
           name: Back-end build
+          working_directory: ./backend
           command: |
             npm i
             npm run build
@@ -130,16 +131,21 @@ jobs:
           name: frontend security check
           working_directory: ./frontend
           command: 
-            npm i
+            #npm i
             npm audit fix --audit-level=critical 
 
-  # scan-backend:
-  #   docker:
-  #     # Docker image here
-  #   steps:
-  #     # Checkout code from git
-  #     # Restore from cache
-  #     # Your job code here
+  scan-backend:
+    <<: *docker_node
+ 
+    steps:
+      - checkout  
+      - restore_cache:
+          keys: [backend-build]          
+      - run:
+          name: backend security check
+          working_directory: ./backend
+          command: 
+            npm audit fix --audit-level=critical  
 
 #### Infrastructure Deployment ####
 
@@ -379,12 +385,12 @@ workflows:
           requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
-   #   - scan-backend:
-   #       requires: [build-backend]
+      - scan-backend:
+          requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
       - deploy-infrastructure:
-          requires: [build-frontend, test-frontend, scan-frontend,test-backend] # scan-backend]
+          requires: [build-frontend, test-frontend, scan-frontend,test-backend, scan-backend]
           filters:
             branches:
               only: [master]
