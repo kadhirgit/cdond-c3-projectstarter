@@ -132,7 +132,7 @@ jobs:
           working_directory: ./frontend
           command: |
             npm i # added to fix oAuth package 
-            npm audit fix --audit-level=critical 
+            npm audit fix --audit-level=critical --force
 
   scan-backend:
     <<: *docker_node
@@ -144,9 +144,9 @@ jobs:
       - run:
           name: backend security check
           working_directory: ./backend
-          command: |
-            npm audit fix --audit-level=critical  
-            exit 1
+          command: 
+            npm audit fix --audit-level=critical --force
+
 
 #### Infrastructure Deployment ####
 
