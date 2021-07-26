@@ -120,13 +120,18 @@ jobs:
               npm i
               npm test
             
-  # scan-frontend:
-  #   docker:
-  #     # Docker image here
-  #   steps:
-  #     # Checkout code from git
-  #     # Restore from cache
-  #     # Your job code here
+  scan-frontend:
+    <<: *docker_node
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [frontend-build]      
+      - run:
+          name: frontend security check
+          working_directory: ./frontend
+          command: 
+            npm i
+            npm audit fix --audit-level=critical --force
 
   # scan-backend:
   #   docker:
@@ -379,7 +384,7 @@ workflows:
    #   - scan-frontend:
    #       requires: [build-frontend]
       - deploy-infrastructure:
-          requires: [build-frontend, test-frontend] # scan-frontend, scan-backend]
+          requires: [build-frontend, test-frontend, scan-frontend] # scan-backend]
           filters:
             branches:
               only: [master]
