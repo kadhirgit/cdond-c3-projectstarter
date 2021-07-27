@@ -243,18 +243,19 @@ jobs:
       - checkout
       - restore_cache:
           keys: [backend-build]
-      - run:
-          name: Run migrations
-          working_directory: ./backend
-          command: |            
-            # npm i        
-            # npm run build
-            npm run migrations >> migration_output.txt
-            cat migration_output.txt    
+      # - run:
+      #     name: Run migrations
+      #     working_directory: ./backend
+      #     command: |            
+      #       npm i        
+      #       npm run build
+      #       npm run migrations >> migration_output.txt
+      #       cat migration_output.txt    
       - run:
           name: store migration result in memstash
           working_directory: ./backend
           command: |
+            cat migration_output.txt 
             if [grep -q "executed successfully" migration_output.txt]
             then
               echo "DB migration was successful"
