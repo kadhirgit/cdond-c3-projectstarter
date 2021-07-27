@@ -34,6 +34,11 @@
 #added extra
 - name: Run node migration
   shell: |
+    echo "migration started"
     cd /home/unbuntu/backend
-    npm run migrations >> migration_output.txt
+    npm run migrations > migration_output.txt
     cat migration_output.txt 
+- name: Start PM2
+  shell: |
+    cd /home/ubuntu/backend
+    pm2 start npm --name backend --start

@@ -228,7 +228,7 @@ jobs:
             echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml            
             cat backend/.env
-           # ls backend
+            ls backend -all
       - persist_to_workspace:
           root: ~/
           paths:
@@ -255,7 +255,7 @@ jobs:
           name: store migration result in memstash
           working_directory: ./backend
           command: |
-            cat migration_output.txt 
+            #cat migration_output.txt 
             if [grep -q "executed successfully" migration_output.txt]
             then
               echo "DB migration was successful"
