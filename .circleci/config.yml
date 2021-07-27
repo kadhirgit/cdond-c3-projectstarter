@@ -46,7 +46,7 @@ commands:
           when: on_fail
           working_directory: ./backend
           command: |
-              status=$(curl -H "token: 8fafc41a-e956-4316-abf9-6b4d6a306a94" --request GET https://api.memstash.io/values/migration_status__<<parameters.workflow_id>>)
+              status=$(curl -H "token: 0624f908-8a6e-4374-98f8-2fd63522646f" --request GET https://api.memstash.io/values/migration_status__<<parameters.workflow_id>>)
               echo $status
               if [[ "$status" == "db_success" ]]
               then
@@ -243,10 +243,10 @@ jobs:
             if [grep -q "executed successfully" migration_output.txt]
             then
               echo "DB migration was successful"
-              curl -H "Content-Type: text/plain" -H "token: 8fafc41a-e956-4316-abf9-6b4d6a306a94" --request PUT --data "db_success" https://api.memstash.io/values/migration_status_${CIRCLE_WORKFLOW_ID:0:7}
+              curl -H "Content-Type: text/plain" -H "token: 0624f908-8a6e-4374-98f8-2fd63522646f" --request PUT --data "db_success" https://api.memstash.io/values/migration_status_${CIRCLE_WORKFLOW_ID:0:7}
             else
               echo "DB migration failed, looks like already exists...moving on."
-              curl -H "Content-Type: text/plain" -H "token: 8fafc41a-e956-4316-abf9-6b4d6a306a94" --request PUT --data "db_failure" https://api.memstash.io/values/migration_status_${CIRCLE_WORKFLOW_ID:0:7}
+              curl -H "Content-Type: text/plain" -H "token: 0624f908-8a6e-4374-98f8-2fd63522646f" --request PUT --data "db_failure" https://api.memstash.io/values/migration_status_${CIRCLE_WORKFLOW_ID:0:7}
             fi
             echo "WorkflowID=${CIRCLE_WORKFLOW_ID:0:7}"                    
       - destroy-environment:          
