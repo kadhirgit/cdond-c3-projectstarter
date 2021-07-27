@@ -227,8 +227,9 @@ jobs:
             echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/.env"
             echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml            
+            pwd
             cat backend/.env
-            ls backend -all
+           # ls backend -all
       - persist_to_workspace:
           root: ~/
           paths:
@@ -243,14 +244,14 @@ jobs:
       - checkout
       - restore_cache:
           keys: [backend-build]
-      # - run:
-      #     name: Run migrations
-      #     working_directory: ./backend
-      #     command: |            
-      #       npm i        
-      #       npm run build
-      #       npm run migrations >> migration_output.txt
-      #       cat migration_output.txt    
+      - run:
+          name: Run migrations
+          working_directory: ./backend
+          command: |            
+            npm i        
+            npm run build
+            npm run migrations >> migration_output.txt
+            cat migration_output.txt    
       - run:
           name: store migration result in memstash
           working_directory: ./backend
