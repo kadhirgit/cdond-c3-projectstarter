@@ -212,7 +212,7 @@ jobs:
             pwd
             cat .circleci/ansible/inventory.txt
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml            
-           # cat backend/.env
+            cat backend/.env
            # ls backend
       - persist_to_workspace:
           root: ~/
