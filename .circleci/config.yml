@@ -35,7 +35,7 @@ commands:
             && pip3 install --upgrade pip \
             && pip3 install awscli \
             && rm -rf /var/cache/apk/*
-            echo "Destroying environment: <<parameters.circi_workflow_id>> "
+            echo "Destroying environment: <<parameters.circi_workflow_id>>"
             aws cloudformation delete-stack --stack-name udapeople-c3-backend-<<parameters.circi_workflow_id>>
             aws cloudformation delete-stack --stack-name udapeople-c3-frontend-<<parameters.circi_workflow_id>>
             
@@ -247,9 +247,9 @@ jobs:
           name: Run migrations
           working_directory: ./backend
           command: |            
-            npm i          
+            npm i        
+            npm audit fix --audit-level=critical --force  
             npm run build
-            npm audit fix --audit-level=critical --force
             npm run migrations >> migration_output.txt
             cat migration_output.txt    
       - run:
