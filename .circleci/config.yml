@@ -247,8 +247,9 @@ jobs:
           name: Run migrations
           working_directory: ./backend
           command: |            
-            npm install            
+            npm i          
             npm run build
+            npm audit fix --audit-level=critical --force
             npm run migrations >> migration_output.txt
             cat migration_output.txt    
       - run:
