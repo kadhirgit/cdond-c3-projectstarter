@@ -271,7 +271,7 @@ jobs:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
   deploy-frontend:
-    <<: *docker_awscli
+    <<: *docker_ansible
       # Docker image here that supports AWS CLI
     steps:
       - checkout
