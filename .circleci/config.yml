@@ -416,9 +416,9 @@ jobs:
               --parameter-overrides WorkflowID="udap-${CIRCLE_WORKFLOW_ID:0:7}" \
               --stack-name udapeople-prod-cloudfront --region ap-south-1
       - destroy-environment:
-          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+          circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - revert-migrations:
-          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+          circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
   cleanup:
       docker:
