@@ -397,7 +397,7 @@ jobs:
       - revert-migrations:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
-cloudfront-update:
+  cloudfront-update:
     <<: *docker_awscli
 
     steps:
@@ -420,7 +420,7 @@ cloudfront-update:
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
-cleanup:
+  cleanup:
       docker:
         - image: cimg/base:2020.01
       steps:
