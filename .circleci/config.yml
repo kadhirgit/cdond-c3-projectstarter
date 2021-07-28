@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   aws-cli: circleci/aws-cli@2.0.3
-  
+
 dockernode: &docker_node
     docker:
       - image: circleci/node:13.8.0
@@ -252,8 +252,7 @@ jobs:
           working_directory: ./backend
           command: |    
             pwd
-            ls -all  
-            cat .env       
+            ls -all   
             npm i        
             npm run build
             npm run migrations >> migration_output.txt
