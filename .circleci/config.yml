@@ -40,6 +40,7 @@ commands:
             && rm -rf /var/cache/apk/*
             echo "Destroying environment: <<parameters.circi_workflow_id>>"
             aws cloudformation delete-stack --stack-name udapeople-c3-backend-<<parameters.circi_workflow_id>>
+            aws s3 rm s3://udapeople-c3-udap-<<parameters.circi_workflow_id>> --recursive
             aws cloudformation delete-stack --stack-name udapeople-c3-frontend-<<parameters.circi_workflow_id>>
             
   revert-migrations:
@@ -139,7 +140,7 @@ jobs:
           working_directory: ./frontend
           command: |
             npm i # added to fix oAuth package 
-            npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical  
 
   scan-backend:
     <<: *docker_node
@@ -386,7 +387,7 @@ jobs:
       - run:
           name: Frontend smoke test
           command: |
-            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.us-west-2.amazonaws.com/ | grep "Welcome"
+            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com/ | grep "Welcome"
             then
               return 0
             else
