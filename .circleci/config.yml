@@ -391,7 +391,7 @@ jobs:
       - run:
           name: Frontend smoke test
           command: |
-            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com/employees | grep "Welcome"
+            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com | grep "Welcome"
             then
               return 0
             else
@@ -442,9 +442,9 @@ jobs:
               echo "Old Workflow ID: ${OldWorkflowID}"
               if [ "${OldWorkflowID}" != "<< pipeline.parameters.workflow-id >>" ]
               then
-                aws s3 rm "s3://udapeople-udap-${CIRCLE_WORKFLOW_ID:5:7}" --recursive
-                aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID:5:7} --region ap-south-1"
-                aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID:5:7} --region ap-south-1"
+                aws s3 rm "s3://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:5:7}" --recursive
+                aws cloudformation delete-stack --stack-name "udapeople-c3-backend-${OldWorkflowID:5:7} --region ap-south-1"
+                aws cloudformation delete-stack --stack-name "udapeople-c3-frontend-${OldWorkflowID:5:7} --region ap-south-1"
               fi
             
 
@@ -478,5 +478,5 @@ workflows:
            requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
            requires: [smoke-test]
- #     - cleanup:
- #         requires: [cloudfront-update]
+      - cleanup:
+         requires: [cloudfront-update]
