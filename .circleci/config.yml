@@ -312,6 +312,8 @@ jobs:
             - project/frontend/dist
       - destroy-environment:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
+      - revert-migrations:
+          circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"     
                     
   deploy-backend:
     <<: *docker_ansible
@@ -351,6 +353,8 @@ jobs:
             ansible-playbook -i ~/project/.circleci/ansible/inventory.txt ~/project/.circleci/ansible/node-explorer.yml
       - destroy-environment:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+      - revert-migrations:
+          circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"     
 
 ### smoke test ###
 
@@ -387,7 +391,7 @@ jobs:
       - run:
           name: Frontend smoke test
           command: |
-            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com/ | grep "Welcome"
+            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com/#/employees | grep "Welcome"
             then
               return 0
             else
