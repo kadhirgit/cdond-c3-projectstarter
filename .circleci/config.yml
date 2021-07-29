@@ -188,7 +188,7 @@ jobs:
             BACKEND_AWS_PUBLICIP=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
-            echo "http://$BACKEND_AWS_PUBLICIP:5432" > ~/output.txt
+            echo "http://$BACKEND_AWS_PUBLICIP:3030" > ~/output.txt
             echo "$BACKEND_AWS_PUBLICIP" >> .circleci/ansible/inventory.txt                 
             cat ~/output.txt 
       - persist_to_workspace:
@@ -384,9 +384,9 @@ jobs:
           command: |            
             if curl -s $API_URL/api/status
             then
-              return 1
-            else
               return 0
+            else
+              return 1
             fi
       - run:
           name: Frontend smoke test
