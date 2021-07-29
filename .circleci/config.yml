@@ -273,7 +273,7 @@ jobs:
 
   deploy-frontend:
     <<: *docker_ansible
-      # Docker image here that supports AWS CLI
+       
     steps:
       - checkout
       - attach_workspace:
