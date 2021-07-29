@@ -371,6 +371,15 @@ jobs:
             apk add --update curl
             pip install awscli
       - run:
+          name: Frontend smoke test
+          command: |
+            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com | grep "Welcome"
+            then
+              return 0
+            else
+              return 1
+            fi            
+      - run:
           name: retrive backend url
           command: |
             pwd
@@ -388,15 +397,7 @@ jobs:
             else
               return 0
             fi
-      - run:
-          name: Frontend smoke test
-          command: |
-            if curl -s http://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com | grep "Welcome"
-            then
-              return 0
-            else
-              return 1
-            fi
+
       - destroy-environment:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - revert-migrations:
