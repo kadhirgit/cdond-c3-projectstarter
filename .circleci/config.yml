@@ -444,8 +444,8 @@ jobs:
               if [ "${OldWorkflowID}" != "<< pipeline.parameters.circi_workflow_id >>" ]
               then
                 aws s3 rm "s3://udapeople-udap-${OldWorkflowID:5:7}" --recursive
-                aws cloudformation delete-stack --stack-name "udapeople-c3-backend-${OldWorkflowID:5:7} --region ap-south-1"
-                aws cloudformation delete-stack --stack-name "udapeople-c3-frontend-${OldWorkflowID:5:7} --region ap-south-1"
+                aws cloudformation delete-stack --stack-name "udapeople-c3-backend-${OldWorkflowID:5:7}"
+                aws cloudformation delete-stack --stack-name "udapeople-c3-frontend-${OldWorkflowID:5:7}"
               fi
             
 
