@@ -305,7 +305,7 @@ jobs:
           name: copy frontend package to aws s3 bucket
           command: |
             cd ~/project/frontend
-            aws s3 cp dist s3://udapeople-c3-udap-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+            aws s3 cp dist s3://udapeople-udap-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - persist_to_workspace:
           root: ~/
           paths:
@@ -393,9 +393,9 @@ jobs:
           command: |            
             if curl -s $API_URL/api/status
             then
-              return 1
-            else
               return 0
+            else
+              return 1
             fi
 
       - destroy-environment:
