@@ -403,6 +403,8 @@ jobs:
       - revert-migrations:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
+# Add Cloudfront for the frontend"
+
   cloudfront-update:
     <<: *docker_awscli
 
@@ -425,6 +427,8 @@ jobs:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - revert-migrations:
           circi_workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+
+### Clean up all old stacks and S3###
 
   cleanup:
       docker:
