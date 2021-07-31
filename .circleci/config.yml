@@ -460,6 +460,7 @@ workflows:
   default:
     jobs:
       - build-frontend
+
       - build-backend
       - test-frontend:
           requires: [build-frontend]
@@ -486,5 +487,5 @@ workflows:
            requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
            requires: [smoke-test]
-      - cleanup:
-         requires: [cloudfront-update]
+      # - cleanup:
+      #    requires: [cloudfront-update]
