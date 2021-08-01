@@ -111,7 +111,7 @@ jobs:
       - run:
           name: Run tests for frontend
           working_directory: ./frontend
-          command:               
+          command: |              
               npm i
               npm test
               
@@ -154,6 +154,7 @@ jobs:
           working_directory: ./backend
           command: |
             npm i
+            npm update
             npm audit fix --audit-level=critical  
 
 
