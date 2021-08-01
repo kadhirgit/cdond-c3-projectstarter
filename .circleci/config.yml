@@ -125,7 +125,7 @@ jobs:
       - run:
           name: Run tests for backend
           working_directory: ./backend
-          command: 
+          command: |
               npm i
               npm test
             
