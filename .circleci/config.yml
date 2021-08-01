@@ -152,7 +152,8 @@ jobs:
       - run:
           name: backend security check
           working_directory: ./backend
-          command: 
+          command: |
+            npm i
             npm audit fix --audit-level=critical  
 
 
